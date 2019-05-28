@@ -1,0 +1,33 @@
+filebeat:
+  registry_file: /usr/share/filebeat/data/registry
+  config:
+    inputs:
+      path: ${path.config}/config/*.yml
+      reload.enabled: true
+  prospectors:
+    input_type: log
+    scan_frequency: 10s
+    multiline:
+      pattern: ^\[
+
+output:
+  elasticsearch:
+    hosts: ["elasticsearch:9200"]
+    index: "java_logs"
+    pipeline: test_pipeline
+
+setup:
+  template:
+    pattern: "structure"
+    name: "structure"
+  kibana:
+    host: "kibana:5601"
+
+shipper:
+
+logging:
+  level: info
+  to_files: true
+  files:
+    path: /var/log/filebeat
+    rotateeverybytes: 10485760 # = 10MB

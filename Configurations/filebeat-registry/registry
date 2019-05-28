@@ -1,0 +1,1 @@
+[{"source":"/usr/share/filebeat/logs/banking.log","offset":5267,"timestamp":"2019-05-28T23:51:36.526302383Z","ttl":-1,"type":"log","meta":null,"FileStateOS":{"inode":12587410,"device":2049}},{"source":"/usr/share/filebeat/logs/movie.log","offset":25314,"timestamp":"2019-05-28T23:51:09.536016158Z","ttl":-1,"type":"log","meta":null,"FileStateOS":{"inode":12587412,"device":2049}}]

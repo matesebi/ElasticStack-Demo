@@ -20,13 +20,13 @@ public interface MovieClient {
     MovieResponse createMovie(@RequestBody CreateMovieRequest movie);
 
     @GetMapping("/{id}")
-    MovieResponse getMovieById(@PathVariable("id") int id);
+    MovieResponse getMovieById(@PathVariable("id") Long id);
 
     @PutMapping("/{id}")
-    MovieResponse updateMovie(@PathVariable("id") int id, @RequestBody UpdateMovieRequest movie);
+    MovieResponse updateMovie(@PathVariable("id") Long id, @RequestBody UpdateMovieRequest movie);
 
     @DeleteMapping("/{id}")
-    void deleteMovie(@PathVariable("id") int id);
+    void deleteMovie(@PathVariable("id") Long id);
 
     @GetMapping("/find")
     List<MovieResponse> searchByYear(@RequestParam("year") Year year, @RequestParam("orderby") String orderBy);

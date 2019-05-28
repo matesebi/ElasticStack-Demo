@@ -1,0 +1,15 @@
+{
+  "description": "Test pipeline",
+  "processors": [
+    {
+      "grok": {
+        "field": "message",
+        "ignore_failure": true,
+        "trace_match": true,
+        "patterns": [
+          "%{DATESTAMP:time}\\]%{SPACE}%{LOGLEVEL:loglevel}  %{NOTSPACE:method} %{GREEDYDATA:text1} %{INT:request_number}"
+        ]
+      }
+    }
+  ]
+}

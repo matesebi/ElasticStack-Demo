@@ -35,6 +35,7 @@ public class MovieController implements IMovieController {
 
     @Override
     public List<MovieResponse> getMovies() {
+        log.info("MovieController.getMovies called");
         List<MovieResult> movieResults = this.movieService.getAll();
 
         return mapMovieResultsToMovieResponses(movieResults);

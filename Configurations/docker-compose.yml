@@ -1,0 +1,57 @@
+version: '3.1'
+
+services:
+
+  mysql:
+    image: mysql
+    hostname: mysql
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: sapassword
+      MYSQL_DATABASE: "movies"
+      MYSQL_USER: "user"
+      MYSQL_PASSWORD: "password"
+    ports:
+    - 3306:3306
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.6.1
+    hostname: elasticsearch
+    container_name: elasticsearch
+    ports:
+    - '9200:9200'
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.6.1
+    hostname: kibana
+    container_name: kibana
+    ports:
+    - '5601:5601'
+    depends_on:
+    - elasticsearch
+
+  apm-server:
+    image: docker.elastic.co/apm/apm-server:6.6.1
+    hostname: apm-server
+    container_name: apm-server
+    ports:
+    - '8200:8200'
+    volumes:
+    - './apm-server.yml:/usr/share/apm-server/apm-server.yml:ro'
+    depends_on:
+    - elasticsearch
+    - kibana
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:6.6.1
+    hostname: filebeat
+    container_name: filebeat
+    volumes:
+    - '../logs/:/usr/share/filebeat/logs/:ro'
+    - './filebeat.yml:/usr/share/filebeat/filebeat.yml:ro'
+    - './filebeat-config:/usr/share/filebeat/config/:ro'
+    - './filebeat-registry/:/usr/share/filebeat/data/'
+    restart: on-failure
+    depends_on:
+    - elasticsearch
+    - kibana
