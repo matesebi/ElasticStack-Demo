@@ -3,7 +3,6 @@ package com.example.matesebi.ticketing;
 import com.example.matesebi.banking.api.BankingClient;
 import com.example.matesebi.banking.api.dto.ChargeAccountRequest;
 import com.example.matesebi.movie.api.MovieClient;
-import com.example.matesebi.movie.api.dto.MovieResponse;
 import com.example.matesebi.ticketing.dto.TicketRequest;
 import com.example.matesebi.ticketing.dto.TicketResponse;
 import com.example.matesebi.ticketing.dto.TicketStatus;
@@ -34,9 +33,8 @@ public class TicketingController {
             throw new IllegalCountException("Count is less than 1: " + request.getCount());
         }
 
-        MovieResponse response = movieClient.getMovieById(request.getMovieId());
-
         try {
+            movieClient.getMovieById(request.getMovieId());
             bankingClient.charge(request.getAccountId(), new ChargeAccountRequest(BigDecimal.valueOf(PRICE * request.getCount())));
 
         } catch (Exception e) {

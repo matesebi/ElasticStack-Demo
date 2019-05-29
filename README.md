@@ -7,7 +7,7 @@ Repository For Elastic Stack demo
 
 add ingest pipeline
 
-`curl -H 'Content-Type: application/json' -XPUT 'http://localhost:9200/_ingest/pipeline/mol-ingest-pipeline' -d@mol-ingest-pipeline.json`
+`curl -H 'Content-Type: application/json' -XPUT 'http://localhost:9200/_ingest/pipeline/mol-ingest-pipeline' -d@test_pipeline.json`
 
 
 # Filebeat

@@ -4,5 +4,10 @@ spring:
   application:
     name: ticketing
 
+banking:
+  url: http://localhost:8082
+
+movie:
+  url: http://localhost:8081
 info:
   version: @version@
