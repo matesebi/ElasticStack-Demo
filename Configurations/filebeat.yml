@@ -1,14 +1,17 @@
 filebeat:
-  registry_file: /usr/share/filebeat/data/registry
+  registry.path: /usr/share/filebeat/data/registry
   config:
     inputs:
-      path: ${path.config}/config/*.yml
       reload.enabled: true
-  prospectors:
-    input_type: log
+  inputs:
+  - type: log
+    paths:
+    - ${path.config}/config/*.yml
     scan_frequency: 10s
     multiline:
       pattern: ^\[
+      negate: true
+      match: after
 
 output:
   elasticsearch:

@@ -15,14 +15,15 @@ services:
     - 3306:3306
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.6.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.2.0
     hostname: elasticsearch
     container_name: elasticsearch
     ports:
     - '9200:9200'
+    command: "/bin/elasticsearch -Ecluster.initial_master_nodes=elasticsearch"
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:6.6.1
+    image: docker.elastic.co/kibana/kibana:7.2.0
     hostname: kibana
     container_name: kibana
     ports:
@@ -31,7 +32,7 @@ services:
     - elasticsearch
 
   apm-server:
-    image: docker.elastic.co/apm/apm-server:6.6.1
+    image: docker.elastic.co/apm/apm-server:7.2.0
     hostname: apm-server
     container_name: apm-server
     ports:
@@ -43,7 +44,7 @@ services:
     - kibana
 
   filebeat:
-    image: docker.elastic.co/beats/filebeat:6.6.1
+    image: docker.elastic.co/beats/filebeat:7.2.0
     hostname: filebeat
     container_name: filebeat
     volumes:
